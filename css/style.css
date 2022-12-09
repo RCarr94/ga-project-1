@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+.container-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+}
+
+.container-top {
+  background-color: red;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.container-mid {
+  background-color: blue;
+  display: flex;
+}
+
+.container-bot {
+  background-color: purple;
+  display: flex;
+}
+
+td {
+  height: 125px;
+  width: 125px;
+  background-color: teal;
+}
+
+.circle {
+  background: white;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: auto;
+}
