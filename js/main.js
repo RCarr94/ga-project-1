@@ -4,6 +4,11 @@ const players = {
   "-1": "green",
 };
 
+const playerNames = {
+    1: "Player 1",
+    "-1": "Player 2"
+}
+
 // win conditions
 
 const winCons = [
@@ -85,6 +90,7 @@ let board, turn, winner;
 // stores elements on page
 
 const zones = document.querySelectorAll("td div");
+const updates = document.querySelector("h1");
 
 // load initial state of game
 
@@ -146,6 +152,28 @@ function zonePicked(e) {
   if (board[idx] || winner !== null) return;
   board[idx] = turn;
   turn *= -1;
-  // add winner = winnerFunctionHere
-  // add render here once function is created
+  winner = playerWin();
+  // add winnerName = playerWin();
+  render();
+}
+
+// find a winner
+
+function playerWin() {
+  for (let i = 0; i < winCons.length; i++) {
+    if (Math.abs(board[winCons[i][0]] + board[winCons[i][1]] + board[winCons[i][2]] + board[winCons[i][3]]) === 4) return board[winCons[i][0]];
+  }
+  if (board.includes(null)) return null;
+  return "Tie";
+}
+
+// Render the board & updated H1 message
+
+function render() {
+  board.forEach(function (z, idx) {
+    zones[idx].style.backgroundColor = players[z];
+  });
+  if (winner == "Tie") {
+    updates.innerHTML = "Wow... an actual tie.";
+  } else if (winner == 1 || winner == -1)
 }
