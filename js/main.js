@@ -93,55 +93,57 @@ const zones = document.querySelectorAll("td div");
 const updates = document.querySelector("h1");
 
 // load initial state of game
+function initialize() {
+  board = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
 
-board = [
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
+  turn = 1;
 
-turn = 1;
-
-winner = null;
+  winner = null;
+}
+initialize();
 
 // player clicking a zone
 
@@ -180,3 +182,20 @@ function render() {
     updates.innerHTML = `${playerNames[turn]}, your move.`;
   }
 }
+
+// disable rows that dont have null zones below them
+// if (background-color !== red || green) {}
+
+// reset board
+// 1. confirm if scores will remain at top (once completed)
+document.querySelector("#reset-board").addEventListener("click", function () {
+  initialize();
+  render();
+  updates.innerHTML = "Let's play again!";
+});
+
+// console.log(reset);
+
+// reset score - check tic-tac-toe reset
+
+// start game - randomly select who gets first move - disable once pressed, if board.includes(null) && scores = 0
