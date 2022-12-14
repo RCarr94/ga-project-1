@@ -194,8 +194,23 @@ document.querySelector("#reset-board").addEventListener("click", function () {
   updates.innerHTML = "Let's play again!";
 });
 
-// console.log(reset);
-
 // reset score - check tic-tac-toe reset
 
 // start game - randomly select who gets first move - disable once pressed, if board.includes(null) && scores = 0
+document.querySelector("#start-game").addEventListener("click", startGame);
+
+function startGame() {
+  if (board.includes(1) || board.includes("-1")) return;
+  let starter = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+  console.log(starter);
+  if (starter == 1) {
+    turn = 1;
+    updates.innerHTML = `${playerNames[turn]} is first!`;
+  }
+  if (starter == 2) {
+    turn = "-1";
+    updates.innerHTML = `${playerNames[turn]} is first!`;
+  }
+}
+
+//Info pop up
