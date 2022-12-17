@@ -40,6 +40,9 @@
 td {
   height: 125px;
   width: 125px;
+  border: 5px solid black;
+  background-color: white;
+  border-radius: 50%;
 }
 
 .circle {
@@ -78,4 +81,12 @@ td {
 
 h1 {
   text-align: center;
+}
+
+.box > div {
+  background-color: white;
+}
+
+.red-chip {
+  background-color: red;
 }

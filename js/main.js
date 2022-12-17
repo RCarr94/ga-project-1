@@ -9,6 +9,18 @@ const playerNames = {
   "-1": "Player 2",
 };
 
+let score = {
+  1: 0,
+  "-1": 0,
+};
+
+// cached elements
+let tr = document.getElementsByTagName("tr");
+let tc = document.getElementsByTagName("td");
+let ts = document.querySelector(".box");
+let updates = document.querySelector("#title");
+const reset = document.querySelector("#reset-board");
+
 // win conditions
 
 const winCons = [
@@ -87,11 +99,6 @@ const winCons = [
 
 let board, turn, winner;
 
-// stores elements on page
-
-const zones = document.querySelectorAll("td div");
-const updates = document.querySelector("h1");
-
 // load initial state of game
 function initialize() {
   board = [
@@ -151,6 +158,7 @@ document.querySelector("table").addEventListener("click", zonePicked);
 
 function zonePicked(e) {
   const idx = parseInt(e.target.id);
+  console.log(idx);
   if (board[idx] || winner !== null) return;
   board[idx] = turn;
   turn *= -1;
@@ -178,6 +186,7 @@ function render() {
     updates.innerHTML = "Wow... an actual tie.";
   } else if (winner == 1 || winner == -1) {
     updates.innerHTML = `${playerNames[winner]} has won Connect Four!`;
+    // add another else if statement splitting the two winners to add score text to them
   } else {
     updates.innerHTML = `${playerNames[turn]}, your move.`;
   }
