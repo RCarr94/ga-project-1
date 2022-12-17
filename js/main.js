@@ -23,7 +23,9 @@ resetBtn.addEventListener("click", function () {
   resetBoard();
 });
 
-startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", function () {
+  startGame();
+});
 
 Array.prototype.forEach.call(tc, function (zone) {
   zone.addEventListener("click", function (e) {
@@ -65,6 +67,7 @@ function addChip(e) {
           turn = 0;
           updates.innerHTML = "P1 Wins!";
         } else if (checkTie()) {
+          turn = 0;
           updates.innerHTML = "Wow... an actual tie game!";
         } else {
           return (turn = 2);
@@ -76,6 +79,7 @@ function addChip(e) {
           turn = 0;
           updates.innerHTML = "P2 Wins!";
         } else if (checkTie()) {
+          turn = 0;
           updates.innerHTML = "Wow... an actual tie game!";
         } else {
           return (turn = 1);
@@ -171,20 +175,19 @@ function checkTie() {
 
 // reset score - check tic-tac-toe reset
 
-// start game - randomly select who gets first move - disable once pressed, if board.includes(null) && scores = 0
-
-// function startGame() {
-//   if (board.includes(1) || board.includes("-1")) return;
-//   let starter = Math.floor(Math.random() * (2 - 1 + 1) + 1);
-//   console.log(starter);
-//   if (starter == 1) {
-//     turn = 1;
-//     updates.innerHTML = `${playerNames[turn]} is first!`;
-//   }
-//   if (starter == 2) {
-//     turn = "-1";
-//     updates.innerHTML = `${playerNames[turn]} is first!`;
-//   }
-// }
+function startGame() {
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") return;
+  }
+  let starter = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+  console.log(starter);
+  if (starter == 1) {
+    turn = 1;
+    updates.innerHTML = "P1 you go first!";
+  } else {
+    turn = 2;
+    updates.innerHTML = "P2 you go first!";
+  }
+}
 
 //Info pop up
