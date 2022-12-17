@@ -16,6 +16,8 @@ let ts = document.querySelector(".box");
 let updates = document.querySelector("#title");
 let resetBtn = document.querySelector("#reset-board");
 let startBtn = document.querySelector("#start-game");
+let p1Score = document.querySelector("#p1-score");
+let p2Score = document.querySelector("#p2-score");
 
 // Event listeners
 // 1. confirm if scores will remain at top (once completed)
@@ -66,6 +68,8 @@ function addChip(e) {
         if (checkWin()) {
           turn = 0;
           updates.innerHTML = "P1 Wins!";
+          score[1] = score[1] + 1;
+          p1Score.innerHTML = `Wins: ${score[1]}`;
         } else if (checkTie()) {
           turn = 0;
           updates.innerHTML = "Wow... an actual tie game!";
@@ -78,6 +82,8 @@ function addChip(e) {
         if (checkWin()) {
           turn = 0;
           updates.innerHTML = "P2 Wins!";
+          score[2] = score[2] + 1;
+          p2Score.innerHTML = `Wins: ${score[2]}`;
         } else if (checkTie()) {
           turn = 0;
           updates.innerHTML = "Wow... an actual tie game!";
