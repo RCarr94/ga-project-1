@@ -23,6 +23,13 @@ document.querySelector("#reset-board").addEventListener("click", function () {
   updates.innerHTML = "Let's play again! Press 'Start Game' to see who goes first!";
 });
 
+Array.prototype.forEach.call(tc, function (zone) {
+  zone.addEventListener("click", function () {
+    // addChip();
+    // playerTurn(); - reminder to add!
+  });
+  zone.style.backgroundColor = "white";
+});
 // Stat tracking variables
 
 let board, winner;
