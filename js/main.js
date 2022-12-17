@@ -16,6 +16,7 @@ let ts = document.querySelector(".box");
 let updates = document.querySelector("#title");
 let resetBtn = document.querySelector("#reset-board");
 let startBtn = document.querySelector("#start-game");
+let scoreBtn = document.querySelector("#reset-score");
 let p1Score = document.querySelector("#p1-score");
 let p2Score = document.querySelector("#p2-score");
 
@@ -27,6 +28,10 @@ resetBtn.addEventListener("click", function () {
 
 startBtn.addEventListener("click", function () {
   startGame();
+});
+
+scoreBtn.addEventListener("click", function () {
+  resetScore();
 });
 
 Array.prototype.forEach.call(tc, function (zone) {
@@ -194,6 +199,16 @@ function startGame() {
     turn = 2;
     updates.innerHTML = "P2 you go first!";
   }
+}
+
+function resetScore() {
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") return;
+  }
+  score[1] = 0;
+  score[2] = 0;
+  p1Score.innerHTML = `Wins: ${score[1]}`;
+  p2Score.innerHTML = `Wins: ${score[2]}`;
 }
 
 //Info pop up
