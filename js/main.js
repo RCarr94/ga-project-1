@@ -185,6 +185,20 @@ function checkWin() {
   }
 }
 
+// Check for tie
+
+function checkTie() {
+  let fillBoard = [];
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") {
+      fillBoard.push(tc[i]);
+    }
+  }
+  if (fillBoard.length == tc.length) {
+    return true;
+  }
+}
+
 // function playerWin() {
 //   for (let i = 0; i < winCons.length; i++) {
 //     if (Math.abs(board[winCons[i][0]] + board[winCons[i][1]] + board[winCons[i][2]] + board[winCons[i][3]]) === 4) return board[winCons[i][0]];
