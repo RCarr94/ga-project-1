@@ -1,182 +1,212 @@
-const players = {
-  null: "white",
-  1: "red",
-  "-1": "green",
+// Variables
+const p1 = "red";
+const p2 = "green";
+
+let turn = 1;
+
+let score = {
+  1: 0,
+  2: 0,
 };
 
-const playerNames = {
-  1: "Player 1",
-  "-1": "Player 2",
-};
+// Cached elements
+let tr = document.getElementsByTagName("tr");
+let tc = document.getElementsByTagName("td");
+let ts = document.querySelector(".box");
+let updates = document.querySelector("#title");
+let resetBtn = document.querySelector("#reset-board");
+let startBtn = document.querySelector("#start-game");
+let scoreBtn = document.querySelector("#reset-score");
+let p1Score = document.querySelector("#p1-score");
+let p2Score = document.querySelector("#p2-score");
 
-// win conditions
+// Event listeners
+// 1. confirm if scores will remain at top (once completed)
+resetBtn.addEventListener("click", function () {
+  resetBoard();
+});
 
-const winCons = [
-  [35, 36, 37, 38],
-  [35, 29, 23, 17],
-  [35, 28, 21, 14],
-  [36, 37, 38, 39],
-  [36, 29, 22, 15],
-  [36, 30, 24, 18],
-  [37, 38, 39, 40],
-  [37, 30, 23, 16],
-  [37, 31, 25, 19],
-  [38, 39, 40, 41],
-  [38, 31, 24, 17],
-  [38, 30, 22, 14],
-  [38, 32, 26, 20],
-  [39, 31, 23, 15],
-  [39, 32, 25, 18],
-  [40, 32, 24, 16],
-  [40, 33, 26, 19],
-  [41, 33, 25, 17],
-  [41, 34, 27, 20],
-  [28, 21, 14, 7],
-  [28, 22, 16, 10],
-  [28, 29, 30, 31],
-  [29, 22, 15, 8],
-  [29, 23, 17, 11],
-  [29, 30, 31, 32],
-  [30, 23, 16, 9],
-  [29, 24, 18, 12],
-  [30, 31, 32, 33],
-  [31, 23, 15, 7],
-  [31, 24, 17, 10],
-  [31, 25, 19, 13],
-  [31, 32, 33, 34],
-  [32, 24, 16, 8],
-  [32, 25, 18, 11],
-  [33, 25, 17, 9],
-  [33, 26, 19, 12],
-  [34, 26, 18, 10],
-  [34, 27, 20, 13],
-  [21, 14, 7, 0],
-  [21, 15, 9, 3],
-  [21, 22, 23, 24],
-  [22, 15, 8, 1],
-  [22, 16, 10, 4],
-  [22, 23, 24, 25],
-  [23, 16, 9, 2],
-  [23, 17, 11, 5],
-  [23, 24, 25, 26],
-  [24, 16, 7, 0],
-  [24, 17, 10, 3],
-  [24, 18, 12, 6],
-  [24, 25, 26, 27],
-  [25, 17, 9, 1],
-  [25, 18, 11, 4],
-  [26, 18, 10, 2],
-  [26, 19, 12, 5],
-  [27, 19, 11, 3],
-  [27, 20, 13, 6],
-  [14, 15, 16, 17],
-  [15, 16, 17, 18],
-  [16, 17, 18, 19],
-  [17, 18, 19, 20],
-  [7, 8, 9, 10],
-  [8, 9, 10, 11],
-  [9, 10, 11, 12],
-  [10, 11, 12, 13],
-  [0, 1, 2, 3],
-  [1, 2, 3, 4],
-  [2, 3, 4, 5],
-  [3, 4, 5, 6],
-];
+startBtn.addEventListener("click", function () {
+  startGame();
+});
 
-// Stat tracking variables
+scoreBtn.addEventListener("click", function () {
+  resetScore();
+});
 
-let board, turn, winner;
-
-// stores elements on page
-
-const zones = document.querySelectorAll("td div");
-const updates = document.querySelector("h1");
-
-// load initial state of game
-
-board = [
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
-
-turn = 1;
-
-winner = null;
-
-// player clicking a zone
-
-document.querySelector("table").addEventListener("click", zonePicked);
-
-function zonePicked(e) {
-  const idx = parseInt(e.target.id);
-  if (board[idx] || winner !== null) return;
-  board[idx] = turn;
-  turn *= -1;
-  winner = playerWin();
-  render();
-}
-
-// find a winner
-
-function playerWin() {
-  for (let i = 0; i < winCons.length; i++) {
-    if (Math.abs(board[winCons[i][0]] + board[winCons[i][1]] + board[winCons[i][2]] + board[winCons[i][3]]) === 4) return board[winCons[i][0]];
-  }
-  if (board.includes(null)) return null;
-  return "Tie";
-}
-
-// Render the board & updated H1 message
-
-function render() {
-  board.forEach(function (z, idx) {
-    zones[idx].style.backgroundColor = players[z];
+Array.prototype.forEach.call(tc, function (zone) {
+  zone.addEventListener("click", function (e) {
+    addChip(e);
+    playerTurn();
   });
-  if (winner == "Tie") {
-    updates.innerHTML = "Wow... an actual tie.";
-  } else if (winner == 1 || winner == -1) {
-    updates.innerHTML = `${playerNames[winner]} has won Connect Four!`;
-  } else {
-    updates.innerHTML = `${playerNames[turn]}, your move.`;
+  zone.style.backgroundColor = "white";
+});
+
+// Functions
+
+function resetBoard() {
+  Array.prototype.forEach.call(tc, function (z) {
+    z.style.backgroundColor = "white";
+    turn = 1;
+    updates.innerHTML = "Play again! Press 'Start Game' to see who goes first!";
+  });
+}
+
+function playerTurn() {
+  if (turn == 1) {
+    updates.innerHTML = "P1, your move!";
+  }
+  if (turn == 2) {
+    updates.innerHTML = "P2, your move!";
   }
 }
+
+function addChip(e) {
+  let location = e.target.cellIndex;
+  let row = [];
+
+  for (let i = 5; i > -1; i--) {
+    if (tr[i].children[location].style.backgroundColor == "white") {
+      row.push(tr[i].children[location]);
+      if (turn == 1) {
+        row[0].style.backgroundColor = p1;
+        if (checkWin()) {
+          turn = 0;
+          updates.innerHTML = "P1 Wins!";
+          score[1] = score[1] + 1;
+          p1Score.innerHTML = `Wins: ${score[1]}`;
+        } else if (checkTie()) {
+          turn = 0;
+          updates.innerHTML = "Wow... an actual tie game!";
+        } else {
+          return (turn = 2);
+        }
+      }
+      if (turn == 2) {
+        row[0].style.backgroundColor = p2;
+        if (checkWin()) {
+          turn = 0;
+          updates.innerHTML = "P2 Wins!";
+          score[2] = score[2] + 1;
+          p2Score.innerHTML = `Wins: ${score[2]}`;
+        } else if (checkTie()) {
+          turn = 0;
+          updates.innerHTML = "Wow... an actual tie game!";
+        } else {
+          return (turn = 1);
+        }
+      }
+    }
+  }
+}
+
+// Check for winner
+
+function colorCheck(box1, box2, box3, box4) {
+  return box1 == box2 && box1 == box3 && box1 == box4 && box1 !== "white";
+}
+
+function checkWin() {
+  // vertical win
+  for (let i = 0; i < 7; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (
+        colorCheck(
+          tr[j].children[i].style.backgroundColor,
+          tr[j + 1].children[i].style.backgroundColor,
+          tr[j + 2].children[i].style.backgroundColor,
+          tr[j + 3].children[i].style.backgroundColor
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+
+  // horizontal win
+  for (let i = 0; i < tr.length; i++) {
+    for (let j = 0; j < 4; j++) {
+      if (
+        colorCheck(
+          tr[i].children[j].style.backgroundColor,
+          tr[i].children[j + 1].style.backgroundColor,
+          tr[i].children[j + 2].style.backgroundColor,
+          tr[i].children[j + 3].style.backgroundColor
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+  // diagonal win right
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (
+        colorCheck(
+          tr[j].children[i].style.backgroundColor,
+          tr[j + 1].children[i + 1].style.backgroundColor,
+          tr[j + 2].children[i + 2].style.backgroundColor,
+          tr[j + 3].children[i + 3].style.backgroundColor
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+  // diagonal win left
+  for (let i = 0; i < 4; i++) {
+    for (let j = 5; j > 2; j--) {
+      if (
+        colorCheck(
+          tr[j].children[i].style.backgroundColor,
+          tr[j - 1].children[i + 1].style.backgroundColor,
+          tr[j - 2].children[i + 2].style.backgroundColor,
+          tr[j - 3].children[i + 3].style.backgroundColor
+        )
+      ) {
+        return true;
+      }
+    }
+  }
+}
+
+// Check for tie
+
+function checkTie() {
+  let fillBoard = [];
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") {
+      fillBoard.push(tc[i]);
+    }
+  }
+  if (fillBoard.length == tc.length) {
+    return true;
+  }
+}
+
+function startGame() {
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") return;
+  }
+  let starter = Math.floor(Math.random() * (2 - 1 + 1) + 1);
+  console.log(starter);
+  if (starter == 1) {
+    turn = 1;
+    updates.innerHTML = "P1 you go first!";
+  } else {
+    turn = 2;
+    updates.innerHTML = "P2 you go first!";
+  }
+}
+
+function resetScore() {
+  for (let i = 0; i < tc.length; i++) {
+    if (tc[i].style.backgroundColor !== "white") return;
+  }
+  score[1] = 0;
+  score[2] = 0;
+  p1Score.innerHTML = `Wins: ${score[1]}`;
+  p2Score.innerHTML = `Wins: ${score[2]}`;
+}
+
+//Info pop up

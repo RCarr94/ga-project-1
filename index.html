@@ -12,83 +12,94 @@
   <div class="container-main">
     <div class="container-top">
       <div id="red-piece">
-        <p>red chip</p>
+        <p>P1</p>
       </div>
       <div id="player1-info">
         <p>Player 1</p>
+        <p id="p1-score">Wins: 0</p>
       </div>
       <div id="title"><h1>Connect Four</h1></div>
-      <div id="player2-info"><p>Player 2</p></div>
-      <div id="green-piece"><p>green chip</p></div>
+      <div id="player2-info">
+        <p>Player 2</p>
+        <p id="p2-score">Wins: 0</p>
+      </div>
+      <div id="green-piece"><p>P2</p></div>
     </div>
 
     <div class="container-mid">
-      <div id="column-selector"></div>
       <div id="game-board">
         <table>
           <tr>
-            <td><div id="0" class="circle"></div></td>
-            <td><div id="1" class="circle"></div></td>
-            <td><div id="2" class="circle"></div></td>
-            <td><div id="3" class="circle"></div></td>
-            <td><div id="4" class="circle"></div></td>
-            <td><div id="5" class="circle"></div></td>
-            <td><div id="6" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
           <tr>
-            <td><div id="7" class="circle"></div></td>
-            <td><div id="8" class="circle"></div></td>
-            <td><div id="9" class="circle"></div></td>
-            <td><div id="10" class="circle"></div></td>
-            <td><div id="11" class="circle"></div></td>
-            <td><div id="12" class="circle"></div></td>
-            <td><div id="13" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
           <tr>
-            <td><div id="14" class="circle"></div></td>
-            <td><div id="15" class="circle"></div></td>
-            <td><div id="16" class="circle"></div></td>
-            <td><div id="17" class="circle"></div></td>
-            <td><div id="18" class="circle"></div></td>
-            <td><div id="19" class="circle"></div></td>
-            <td><div id="20" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
           <tr>
-            <td><div id="21" class="circle"></div></td>
-            <td><div id="22" class="circle"></div></td>
-            <td><div id="23" class="circle"></div></td>
-            <td><div id="24" class="circle"></div></td>
-            <td><div id="25" class="circle"></div></td>
-            <td><div id="26" class="circle"></div></td>
-            <td><div id="27" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
           <tr>
-            <td><div id="28" class="circle"></div></td>
-            <td><div id="29" class="circle"></div></td>
-            <td><div id="30" class="circle"></div></td>
-            <td><div id="31" class="circle"></div></td>
-            <td><div id="32" class="circle"></div></td>
-            <td><div id="33" class="circle"></div></td>
-            <td><div id="34" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
           <tr>
-            <td><div id="35" class="circle"></div></td>
-            <td><div id="36" class="circle"></div></td>
-            <td><div id="37" class="circle"></div></td>
-            <td><div id="38" class="circle"></div></td>
-            <td><div id="39" class="circle"></div></td>
-            <td><div id="40" class="circle"></div></td>
-            <td><div id="41" class="circle"></div></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
+            <td class="box"></td>
           </tr>
         </table>
       </div>
     </div>
 
     <div class="container-bot">
-      <div id="info"><p>I</p></div>
-      <div id="reset-board"><p>Reset Board</p></div>
-      <div id="reset-score"><p>Reset Score</p></div>
-      <div id="start-game"><p>Start Game</p></div>
+      <div id="info">
+        <form action="https://www.wikihow.com/Play-Connect-4" method="get" target="_blank">
+          <button class="btn-style">Rules</button>
+        </form>
+      </div>
+      <div id="reset-board"><button class="btn-style">Reset Board</button></div>
+      <div id="reset-score">
+        <button class="btn-style">Reset Score</button>
+      </div>
+      <div id="start-game">
+        <button class="btn-style">Start Game</button>
+      </div>
     </div>
   </div>
 </html>
