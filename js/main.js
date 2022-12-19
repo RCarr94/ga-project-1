@@ -184,8 +184,6 @@ function checkTie() {
   }
 }
 
-// reset score - check tic-tac-toe reset
-
 function startGame() {
   for (let i = 0; i < tc.length; i++) {
     if (tc[i].style.backgroundColor !== "white") return;
