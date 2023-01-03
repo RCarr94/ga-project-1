@@ -1,6 +1,6 @@
 # GA Project 1: Connect Four
 
-### To Play [Click here](https://rcarr94.github.io/ga-project-1/)
+### To Play <a href="https://rcarr94.github.io/ga-project-1/" target="_blank">click here</a>
 
 ### General Overview
 
